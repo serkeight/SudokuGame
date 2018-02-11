@@ -58,4 +58,15 @@ public final class SudokuGame implements SudokuInterface {
         return (count==1);
     }
     
+    public int getTheUniqueAllowedValue(int row, int col){
+        int[] allowedValues = getAllowedValuesInTheCurrentCell(row, col);
+        int uniqueValue = 0;
+        for (int ii=0; ii<allowedValues.length; ii++){
+            if (allowedValues[ii] != 0){
+                uniqueValue = allowedValues[ii];
+            }
+        }
+        return uniqueValue;
+    }
+    
 }
