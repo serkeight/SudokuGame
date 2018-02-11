@@ -46,3 +46,16 @@ public final class SudokuGame implements SudokuInterface {
         }
         return allowedValues;
     }
+    
+    public boolean isOnlyOneValueAllowedInTheCurrentCell(int row, int col){
+        int[] allowedValues = getAllowedValuesInTheCurrentCell(row, col);
+        int count = 0;
+        for (int ii=0; ii<allowedValues.length; ii++){
+            if (allowedValues[ii]>0){
+                count++;
+            }
+        }
+        return (count==1);
+    }
+    
+}
