@@ -1,12 +1,17 @@
 package sudokugame;
 
-public final class SudokuGame implements SudokuInterface {
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
-    public static void main(java.lang.String[] args) {
+public final class SudokuGame implements SudokuInterface {
+    
+    private final int boardSize = 9;
+    private final int groupSize = 9;
+    private final int EMPTY_CELL = 0;
+    private int currentStep = 1;
+    int[][] game;
+
+    public static void main(String[] args) {
         new SudokuGame();
     }
-    
-    public SudokuGame() {
-
-    }
-}
