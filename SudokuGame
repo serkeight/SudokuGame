@@ -1,2 +1,12 @@
-//lol hi guys
-hello??
+package sudokugame;
+
+public final class SudokuGame implements SudokuInterface {
+
+    public static void main(java.lang.String[] args) {
+        new SudokuGame();
+    }
+    
+    public SudokuGame() {
+
+    }
+}
