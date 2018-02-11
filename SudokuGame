@@ -16,6 +16,15 @@ public final class SudokuGame implements SudokuInterface {
         new SudokuGame();
     }
     
+    public int[] getAllowedValuesInTheCurrentCell(int row, int col) {
+        int[] allowedValuesInCurrentRow = getAllowedValuesInCurrentRow(row);
+        int[] allowedValuesInCurrentCol = getAllowedValuesInCurrentCol(col);
+        int[] allowedValuesInCurrentGroup = getAllowedValuesInCurrentGroup(row, col);
+        int[] allowedValues = getAllowedValuesBasedOnTheThreeRules(allowedValuesInCurrentRow,
+                allowedValuesInCurrentCol, allowedValuesInCurrentGroup);
+        return allowedValues;
+    }
+    
     public int[] getAllowedValuesBasedOnTheThreeRules(int[] allowedValuesInCurrentRow,
             int[] allowedValuesInCurrentCol, int[] allowedValuesInCurrentGroup){
         int[] allowedValues = new int[9];
