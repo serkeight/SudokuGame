@@ -26,23 +26,30 @@ public final class SudokuGame implements SudokuInterface {
     /* Natasha's section
     */
     
-    public int[] getAllowedValuesInCurrentCol(int col) {
+    
+
+public int[] getAllowedValuesInCurrentCol(int col) {
     int[] allowedValues = {1,2,3,4,5,6,7,8,9};
-    int[] vals = new int[9];
-    int j = 0;
-    for (int i = (col-1); i < puzzle.length; i+=9) {
-      vals[j] = puzzle[i];
-      if (vals[j] != 0) { 
+    int[] vals = new int[boardSize];
+    
+    int m = 0;
+    int n = 0;
+    for (int i = 0; i < game.length; i++) {
+        for (int j = (col-1); j < game.length; j+=9) {
+            vals[m++] = game[i][j];
+            //System.out.print(game[i][j] + ", ");
+        }
+         
+        
+        if (vals[n] != 0) { 
           for (int k = 0; k < allowedValues.length; k++) {
-              if (vals[j] == allowedValues[k]) {
+              if (vals[n] == allowedValues[k]) {
                   allowedValues[k] = 0;
               }
                       
           }
-      }
-          
-          
-      j++;
+      }  
+      n++; 
     }
     
     for (int i = 0; i < vals.length; i++) {
@@ -56,25 +63,31 @@ public final class SudokuGame implements SudokuInterface {
     
     return allowedValues;
 }
+
+
 
 public int[] getAllowedValuesInCurrentRow(int row) {
     int[] allowedValues = {1,2,3,4,5,6,7,8,9};
-    int[] vals = new int[9];
-    int j = 0;
-    int newRow = ((row-1)*9);
-    for (int i = newRow; i < newRow+9; i++) {
-      vals[j] = puzzle[i];
-      if (vals[j] != 0) { 
+    int[] vals = new int[boardSize];
+    
+    int m = 0;
+    int n = 0;
+    for (int i = (row-1); i < game.length; i+=9) {
+        for (int j = 0; j < game.length; j++) {
+            vals[m++] = game[i][j];
+            //System.out.print(game[i][j] + ", ");
+        }
+         
+        
+        if (vals[n] != 0) { 
           for (int k = 0; k < allowedValues.length; k++) {
-              if (vals[j] == allowedValues[k]) {
+              if (vals[n] == allowedValues[k]) {
                   allowedValues[k] = 0;
               }
                       
           }
-      }
-          
-          
-      j++;
+      }  
+      n++; 
     }
     
     for (int i = 0; i < vals.length; i++) {
@@ -87,9 +100,84 @@ public int[] getAllowedValuesInCurrentRow(int row) {
     }
     
     return allowedValues;
+}
+
+
+public int[] getAllowedValuesInCurrentGroup(int row, int col) {
+    int[] allowedValues = {1,2,3,4,5,6,7,8,9};
+    int[] vals = new int[boardSize];
+    int newRow = 0;
+    int newCol = 0;
+    
+    if (row == 1) 
+        newRow = 0;
+    if (row == 2) 
+        newRow = 3;
+    if (row == 3) 
+        newRow = 6;
+    if (col == 1) 
+        newCol = 0;
+    if (col == 2) 
+        newCol = 3;
+    if (col == 3) 
+        newCol = 6;
+    
+    System.out.println("row: " + newRow + "\ncol: " + newCol);
+    
+    
+    int m = 0;
+    int n = 0;
+    for (int i = newRow; i < (newRow+3); i++) {
+        for (int j = newCol; j < (newCol+3); j++) {
+            vals[m++] = game[i][j];
+            
+            //System.out.print(game[i][j] + ", ");
+        
+        
+        
+        if (vals[n] != 0) { 
+          for (int k = 0; k < allowedValues.length; k++) {
+              if (vals[n] == allowedValues[k]) {
+                  allowedValues[k] = 0;
+              }
+                      
+          }
+      }  
+      n++; 
+    }
+    }
+    for (int i = 0; i < vals.length; i++) {
+        System.out.print(vals[i] + ", ");
+    }
+    System.out.println();
+    
+    for (int i = 0; i < allowedValues.length; i++) {
+        System.out.print(allowedValues[i] + ", ");
+    }
+    
+    return allowedValues;
+        
+}
+
+
+
+public boolean isCellEmpty(int row, int col) {
+    row--;
+    col--;
+    if (game[row][col] == 0){
+//        System.out.println(puzzle[(row*9)+col]);
+        return true;
+    }
+    else {
+//        System.out.println(puzzle[(row*9)+col]);
+        return false;
+    }
     
 }
 
+    
+    
+    
 /* New part 
 */
     
